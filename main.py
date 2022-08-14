@@ -27,6 +27,12 @@ async def get_single_company(company_id: int):
     return ck[0] if len(company) > 0 else {}
 
 
+    # # # this get a single company
+@app.get("/company", status_code=200)
+async def get_all_company():
+    return company
+
+
 # #post method 
 @app.post("/company", status_code=201)
 def add_company(comp: Company):
