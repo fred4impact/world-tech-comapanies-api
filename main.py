@@ -59,27 +59,27 @@ with open('payload.json', 'r') as f:
     #   print(company) 
 
 
-# @app.get("/")
-# def get_request():
-#     return {"data": "Welcome to Top world tech companies list API"}
+@app.get("/")
+def get_request():
+    return {"data": "Welcome to Top world tech companies list API Home Page"}
 
 
 
     # # # this get a single company
-@app.get("/tech-api/get-all-listed",tags=["teches"], status_code=200)
+@app.get("/get-all-companies",tags=["teches"], status_code=200)
 async def get_all_company():
     return company
 
 
 # # # this get a single company
-@app.get("/tech-api/get-byId/{company_id}", tags=["teches"], status_code=200)
+@app.get("/get-by-id/{company_id}", tags=["teches"], status_code=200)
 async def get_single_company(company_id: int):
     ck = [c for c in company if c['id'] == company_id]
     return ck[0] if len(company) > 0 else {}
 
 
 # #post method 
-@app.post("/tech-api/add-company",tags=["teches"], status_code=201)
+@app.post("/add-company/",tags=["teches"], status_code=201)
 def add_company(comp: Company):
     company_id = max([r['id'] for r in company]) + 1
     new_company = {
@@ -123,7 +123,7 @@ def add_company(comp: Company):
 
 
 #update  method 
-@app.put("/tech-api/update",tags=["teches"], status_code=204)
+@app.put("/update-company/",tags=["teches"], status_code=204)
 def update_company(updatecomp: Company):
     new_update = {
      "id": updatecomp.id,
@@ -146,7 +146,7 @@ def update_company(updatecomp: Company):
 
 
 # delete company
-@app.delete("/tech-api/delete/{company_id}",tags=["teches"], status_code=204)
+@app.delete("/delete-company/{company_id}",tags=["teches"], status_code=204)
 def remove_company(company_id: int):
     cp = [p for p in company if p['id'] == company_id]
     if len(cp) > 0:
